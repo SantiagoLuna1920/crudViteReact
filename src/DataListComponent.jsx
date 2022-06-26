@@ -5,7 +5,7 @@ export function DataListComponent ({replaceData, sendDatas, onClick }) {
     
     const child = useMemo (()=> { 
         return sendDatas.map( (data, index) => (
-            <StateButtonComponent key={index} replaceData={replaceData} onClick={onClick} sendDatas={sendDatas} data={data} index={index} />
+            <StateButtonComponent key={data.id} replaceData={replaceData} onClick={onClick} sendDatas={sendDatas} data={data} index={index} />
         ) )
      }, [ sendDatas, onClick ])
 
