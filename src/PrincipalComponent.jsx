@@ -51,6 +51,7 @@ export function PrincipalComponent () {
         </form>
         <hr />
         { child }
+        <hr />
         </div>
     );
 }
