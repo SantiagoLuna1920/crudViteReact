@@ -1,13 +1,12 @@
 import { useMemo } from "react";
 import { useState } from "react";
 
-export function DataListComponent ({replaceData, sendDatas, onClick }) {
-    
+export function DataListComponent ({replaceData, sendDatas, onClick, sendDataa, deleteData }) {
     const child = useMemo (()=> { 
-        return sendDatas.map( (data, index) => (
-            <StateButtonComponent key={data.id} replaceData={replaceData} onClick={onClick} sendDatas={sendDatas} data={data} index={index} />
+        return sendDataa.map( (data, index) => (
+            <StateButtonComponent key={data.id} replaceData={replaceData} onClick={onClick} sendDatas={sendDatas} data={data} index={index} sendDataa={sendDataa} deleteData={deleteData} />
         ) )
-     }, [ sendDatas, onClick ])
+     }, [ sendDataa, onClick ])
 
     return (
             <>
@@ -16,7 +15,7 @@ export function DataListComponent ({replaceData, sendDatas, onClick }) {
     )
 }
 
-function StateButtonComponent ({replaceData, index, onClick, sendDatas, data}) {
+function StateButtonComponent ({replaceData, index, data, deleteData}) {
     const [ stateComponent, setStateComponent ] = useState(false);
 
     let dataContent;
@@ -64,13 +63,6 @@ function StateButtonComponent ({replaceData, index, onClick, sendDatas, data}) {
                             <button onClick={ () => {deleteData(data.id)}} >Delete</button>
                             </td>
             </>
-        )
-    }
-    function deleteData (ids) {
-        onClick(
-            sendDatas.filter( (deleteUser) => {
-                return deleteUser.id !== ids;
-            } )
         )
     }
 
