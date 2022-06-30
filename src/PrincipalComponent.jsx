@@ -3,14 +3,12 @@ import { useState } from "react";
 import { DatasComponent } from "./DatasComponent";
 import datasReducer from "./helpers/datasController";
 
-
 let nextId = 0;
 
 export function PrincipalComponent () {
 
     const [ datas, setDatas ] = useState({});
-    const [ sendDatas, setSendDatas ] = useState([]);
-    const [ sendDataa, dispatch ] = useReducer( datasReducer, [] );
+    const [ sendDatas, dispatch ] = useReducer( datasReducer, [] );
 
     function sendData (e) {
         e.preventDefault();
@@ -41,8 +39,8 @@ export function PrincipalComponent () {
 
     //useMemo para evitar renderizado de un componente
     const child = useMemo(()=> {
-        return <DatasComponent replaceData={replaceData} onClick={ setSendDatas } sendDatas={sendDatas} sendDataa={sendDataa} deleteData={deleteData} />
-      },[sendDataa])
+        return <DatasComponent replaceData={replaceData} sendDatas={sendDatas} deleteData={deleteData} />
+      },[sendDatas])
 
     return (
         <div>

@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import { useState } from "react";
 
-export function DataListComponent ({replaceData, sendDatas, onClick, sendDataa, deleteData }) {
+export function DataListComponent ({replaceData, sendDatas, deleteData }) {
     const child = useMemo (()=> { 
-        return sendDataa.map( (data, index) => (
-            <StateButtonComponent key={data.id} replaceData={replaceData} onClick={onClick} sendDatas={sendDatas} data={data} index={index} sendDataa={sendDataa} deleteData={deleteData} />
+        return sendDatas.map( (data, index) => (
+            <StateButtonComponent key={data.id} replaceData={replaceData} data={data} index={index} deleteData={deleteData} />
         ) )
-     }, [ sendDataa, onClick ])
+     }, [ sendDatas ])
 
     return (
             <>

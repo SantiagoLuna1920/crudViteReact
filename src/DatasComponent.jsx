@@ -2,11 +2,11 @@ import { useMemo } from "react";
 import { DataListComponent } from "./DataListComponent";
 
 
-export function DatasComponent ({sendDatas, onClick, replaceData, sendDataa, deleteData}) {
+export function DatasComponent ({sendDatas, replaceData, deleteData}) {
 
     const child = useMemo(() => {
-        return <DataListComponent replaceData={replaceData} sendDatas={sendDatas} onClick={ onClick } sendDataa={sendDataa} deleteData={deleteData}/>
-    },[ sendDataa ])
+        return <DataListComponent replaceData={replaceData} sendDatas={sendDatas} deleteData={deleteData}/>
+    },[ sendDatas ])
 
     return (
         <table>
