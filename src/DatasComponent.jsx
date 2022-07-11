@@ -8,7 +8,7 @@ export function DatasComponent () {
                 <tr>
                     <th>Name</th>
                     <th>Last name</th>
-                    <th>Counntry</th>
+                    <th>Country</th>
                     <th>Identifier</th>
                     <th>Interactive</th>
                 </tr>
