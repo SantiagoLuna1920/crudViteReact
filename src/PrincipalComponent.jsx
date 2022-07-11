@@ -1,15 +1,13 @@
-import { useMemo, useReducer } from "react";
 import { useState } from "react";
 import { DatasComponent } from "./DatasComponent";
-import datasReducer from "./helpers/datasController";
+import { useDispatch } from "./helpers/datasController";
 
 let nextId = 0;
 
 export function PrincipalComponent () {
 
     const [ datas, setDatas ] = useState({});
-    const [ sendDatas, dispatch ] = useReducer( datasReducer, [] );
-
+    const dispatch = useDispatch();
     function sendData (e) {
         e.preventDefault();
         dispatch({
@@ -19,28 +17,6 @@ export function PrincipalComponent () {
         });
         setDatas({name: "", lastName: "", country: ""});    
     }
-
-    function replaceData ( data ) {
-        dispatch({
-            type: 'Edit_data',
-            data: data
-        })
-    }
-
-    function deleteData (ids) {
-        dispatch(
-            {
-                type: 'Delete_data',
-                id: ids,
-            }
-        )
-        
-    }
-
-    //useMemo para evitar renderizado de un componente
-    const child = useMemo(()=> {
-        return <DatasComponent replaceData={replaceData} sendDatas={sendDatas} deleteData={deleteData} />
-      },[sendDatas])
 
     return (
         <div>
@@ -59,7 +35,7 @@ export function PrincipalComponent () {
         <button>Send datas</button>
         </form>
         <hr />
-        { child }
+        <DatasComponent />
         <hr />
         </div>
     );

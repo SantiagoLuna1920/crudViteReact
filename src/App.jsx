@@ -1,9 +1,12 @@
+import { DatasProvider } from "./helpers/datasController";
 import { PrincipalComponent } from "./PrincipalComponent";
 
 function App () {
 
   return (
-      <PrincipalComponent />
+      <DatasProvider>
+        <PrincipalComponent />
+      </DatasProvider>
   );
 }
 

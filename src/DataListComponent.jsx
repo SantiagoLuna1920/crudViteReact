@@ -1,22 +1,23 @@
-import { useMemo } from "react";
 import { useState } from "react";
+import { useDispatch, useSendDatas } from "./helpers/datasController";
 
-export function DataListComponent ({replaceData, sendDatas, deleteData }) {
-    const child = useMemo (()=> { 
-        return sendDatas.map( (data, index) => (
-            <StateButtonComponent key={data.id} replaceData={replaceData} data={data} index={index} deleteData={deleteData} />
-        ) )
-     }, [ sendDatas ])
+export function DataListComponent () {
+    const sendDatas = useSendDatas();
 
     return (
             <>
-            {child}
+            {
+            sendDatas.map( (data, index) => (
+            <StateButtonComponent key={data.id} data={data} index={index} />
+                ) )
+            }
             </>
     )
 }
 
-function StateButtonComponent ({replaceData, index, data, deleteData}) {
+function StateButtonComponent ({index, data}) {
     const [ stateComponent, setStateComponent ] = useState(false);
+    const dispatch = useDispatch();
 
     let dataContent;
 
@@ -24,29 +25,44 @@ function StateButtonComponent ({replaceData, index, data, deleteData}) {
         dataContent = (
             <>
                 <td><input value={ data.name } onChange={(e)=> {
-                    replaceData({
-                        ...data,
-                        name: e.target.value
-                    })
+                    dispatch({
+                    type: 'Edit_data',
+                    data: {
+                    ...data,
+                    name: e.target.value
+                    }
+        })
                 } } /></td>
                 <td><input value={ data.lastName } onChange={(e)=> {
-                    replaceData({
-                        ...data,
-                        lastName: e.target.value
-                    })
+                    dispatch({
+                    type: 'Edit_data',
+                    data: {
+                    ...data,
+                    lastName: e.target.value
+                    }
+        })
                 } }  /></td>
                 <td><input value={ data.country } onChange={(e)=> {
-                    replaceData({
-                        ...data,
-                        country: e.target.value
-                    })
+                    dispatch({
+                    type: 'Edit_data',
+                    data: {
+                    ...data,
+                    country: e.target.value
+                    }
+        })
                 } } /></td>
                             <td>{ data.id }</td>
                             <td> <button onClick={ () => {
                                 setStateComponent(false)
                                 
                             } } >Save</button>
-                            <button onClick={ () => {deleteData(data.id)}} >Delete</button>
+                            <button onClick={ () => {
+                                dispatch({
+                                type: 'Delete_data',
+                id: data.id,
+            }
+        )
+                            }} >Delete</button>
                             </td>
             </>
         )
@@ -60,7 +76,14 @@ function StateButtonComponent ({replaceData, index, data, deleteData}) {
                             <td> <button onClick={ () => {
                                 setStateComponent(true)
                             } } >Edit</button>
-                            <button onClick={ () => {deleteData(data.id)}} >Delete</button>
+                            <button onClick={ () => {
+                                dispatch(
+            {
+                type: 'Delete_data',
+                id: data.id,
+            }
+        )
+                            }} >Delete</button>
                             </td>
             </>
         )

@@ -1,13 +1,7 @@
-import { useMemo } from "react";
 import { DataListComponent } from "./DataListComponent";
 
 
-export function DatasComponent ({sendDatas, replaceData, deleteData}) {
-
-    const child = useMemo(() => {
-        return <DataListComponent replaceData={replaceData} sendDatas={sendDatas} deleteData={deleteData}/>
-    },[ sendDatas ])
-
+export function DatasComponent () {
     return (
         <table>
             <thead>
@@ -20,7 +14,7 @@ export function DatasComponent ({sendDatas, replaceData, deleteData}) {
                 </tr>
             </thead>
             <tbody>
-                { child } 
+                <DataListComponent />
             </tbody>
         </table>
     )
